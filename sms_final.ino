@@ -34,7 +34,7 @@ boolean getNumber = false;
 boolean getTextStatus = false;
 boolean isGoingToText = false;
 boolean getTextRequestId = false;
-boolean errorSMS = false;
+//boolean errorSMS = false;
 //void updateSerial(boolean readSignal = false);
 
 void setup() {
@@ -278,17 +278,18 @@ void signalCheck() {
     Serial.println("signal detected");
     if (signalNo.toInt() > 0) {
       // naay signal
-      errorSMS  = false;
+//      errorSMS  = false;
       digitalWrite(A1, HIGH);
       digitalWrite(A3, LOW);
+      updateSerial();
     }
     else {
       // wlay signal
-      errorSMS  = true;
+//      errorSMS  = true;
       digitalWrite(A3, HIGH);
       digitalWrite(A1, LOW);
+      updateSerial();
     }
-    updateSerial();
   } else {
     Serial.println("no signal detected");
     digitalWrite(A1, LOW);
@@ -336,11 +337,11 @@ void updateHttpRequest() {
     Serial.print("&status=");
     client.print(true);
     Serial.print(true);
-    if (errorSMS) {
-      client.print("&error_status=");
-      client.print(true);
-      client.print("&error_sms_remarks=ERROR or timeout waiting for response to CMGS command (NO signal)");
-    }
+//    if (errorSMS) {
+//      client.print("&error_status=");
+//      client.print(true);
+//      client.print("&error_sms_remarks=ERROR or timeout waiting for response to CMGS command (NO signal)");
+//    }
     client.print(" HTTP/1.1");
     client.println();
     client.println("Host: localhost");
